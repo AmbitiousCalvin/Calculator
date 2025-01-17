@@ -1,0 +1,151 @@
+:root {
+  --bg-dark: #222222; /* Dark background */
+  --bg-light: #333333; /* Slightly lighter dark background */
+  --text-dark: #ffffff; /* White text for contrast */
+  --text-muted: #bbbbbb; /* Muted gray text */
+  --accent-light: #444444; /* Slightly lighter accents */
+  --accent-dark: #111111; /* Dark accents for depth */
+  --btn-default: #444444; /* Default button background */
+  --btn-hover: #555555; /* Button hover state */
+  --btn-active: #666666; /* Button active state */
+  --btn-outline: #777777; /* Button outline */
+  --operator-bg: #555555; /* Operator button background */
+  --operator-hover: #666666; /* Operator hover background */
+  --clear-btn-bg: #ff4d4d; /* Red for clear button */
+  --equals-btn-bg: #4dff4d; /* Green for equals button */
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 45rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  border: 0.1rem solid var(--accent-dark);
+  gap: 1.5rem;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  min-height: 12rem;
+  padding: 1rem;
+  background-color: var(--accent-light);
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  color: var(--text-dark);
+  gap: 0.5rem;
+}
+
+.display span:first-child {
+  color: var(--text-muted);
+}
+
+.display span:nth-child(2) {
+  font-size: 3.5rem;
+}
+
+.row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.1rem;
+  margin: 0.1rem 0;
+}
+
+.container button {
+  height: 8rem;
+  position: relative;
+  font-size: 2.5rem;
+  cursor: pointer;
+  background-color: var(--btn-default);
+  color: var(--text-dark);
+  outline: none;
+  transition: all 0.05s;
+  border: 0.2rem solid var(--btn-outline);
+}
+
+.container button:active {
+  top: 0.2rem;
+  left: 0.2rem;
+  background-color: var(--btn-active);
+}
+
+.container button:hover {
+  border: 0.1rem solid var(--text-dark);
+  background-color: var(--btn-hover);
+}
+
+.container .operator-btn {
+  background-color: var(--operator-bg);
+}
+
+.container .operator-btn:hover {
+  background-color: var(--operator-hover);
+}
+
+.container .zero,
+.container .clear-btn {
+  width: 100%;
+  grid-column: span 2;
+}
+
+.container .clear-btn {
+  background-color: var(--clear-btn-bg);
+}
+
+#equals {
+  background-color: var(--equals-btn-bg);
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-button {
+  padding: 2rem;
+  font-size: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: 1px solid var(--btn-hover);
+  background-color: var(--btn-default);
+  color: var(--text-dark);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.grid-button:hover {
+  background-color: var(--btn-hover);
+  border-color: var(--btn-outline);
+}
+
+.grid-button:active {
+  transform: scale(0.95);
+}
