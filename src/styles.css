@@ -1,18 +1,20 @@
 :root {
-  --bg-dark: #222222; /* Dark background */
-  --bg-light: #333333; /* Slightly lighter dark background */
-  --text-dark: #ffffff; /* White text for contrast */
-  --text-muted: #bbbbbb; /* Muted gray text */
-  --accent-light: #444444; /* Slightly lighter accents */
-  --accent-dark: #111111; /* Dark accents for depth */
-  --btn-default: #444444; /* Default button background */
-  --btn-hover: #555555; /* Button hover state */
-  --btn-active: #666666; /* Button active state */
-  --btn-outline: #777777; /* Button outline */
-  --operator-bg: #555555; /* Operator button background */
-  --operator-hover: #666666; /* Operator hover background */
-  --clear-btn-bg: #ff4d4d; /* Red for clear button */
-  --equals-btn-bg: #4dff4d; /* Green for equals button */
+  --bg-dark: #1a1a2e; /* Deep dark purple for background */
+  --bg-light: #16213e; /* Slightly lighter dark purple */
+  --text-dark: #eaeaea; /* Light gray for contrast */
+  --text-muted: #a6a6a6; /* Muted gray for less emphasis */
+  --accent-light: #2a3f5f; /* Soft purple accents */
+  --accent-dark: #0f1726; /* Deep dark purple for depth */
+  --btn-default: #3a4575; /* Subtle purple for default buttons */
+  --btn-hover: #4b5c96; /* Slightly brighter purple for hover state */
+  --btn-active: #5f73b0; /* Active button state with a bold purple */
+  --btn-outline: #6677c3; /* Outline with a light purple tone */
+  --operator-bg: #4b5c96; /* Purple for operator buttons */
+  --operator-hover: #5f73b0; /* Bright hover effect for operator buttons */
+  --clear-btn-bg: #3a4575; /* Bold red for the clear button */
+  --equals-btn-bg: #26d76f; /* Bright green for the equals button */
+  --current-active: #26d76f; /* Specific color for currently active elements */
+  --current-inactive: #3a4575; /* Specific color for inactive elements */
 }
 
 * {
@@ -36,13 +38,21 @@ body {
 
 .App {
   display: flex;
-  flex-direction: column;
-  width: 45rem;
+  flex-direction: row;
+  width: 50rem;
   padding: 1.5rem;
   border-radius: 1rem;
   background-color: var(--bg-light);
   min-height: 100vh;
   border: 0.1rem solid var(--accent-dark);
+  gap: 1.5rem;
+  border: 1px solid red;
+}
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
@@ -74,20 +84,33 @@ body {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.1rem;
-  margin: 0.1rem 0;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.row:first-child button,
+.row button:last-child {
+  color: var(--current-active);
+}
+
+.container {
+  padding: 1.5rem;
+  background-color: var(--accent-light);
+  border-radius: 3rem;
 }
 
 .container button {
+  border-radius: 1rem;
   height: 8rem;
   position: relative;
   font-size: 2.5rem;
+  font-weight: bold;
   cursor: pointer;
   background-color: var(--btn-default);
   color: var(--text-dark);
   outline: none;
+  border: none;
   transition: all 0.05s;
-  border: 0.2rem solid var(--btn-outline);
 }
 
 .container button:active {
@@ -115,22 +138,15 @@ body {
   grid-column: span 2;
 }
 
-.container .clear-btn {
-  background-color: var(--clear-btn-bg);
-}
-
-#equals {
-  background-color: var(--equals-btn-bg);
-}
-
 .grid-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 5rem;
 }
 
 .grid-button {
-  padding: 2rem;
+  padding: 1.5rem;
   font-size: 2rem;
   border: none;
   border-radius: 0.5rem;
@@ -148,4 +164,229 @@ body {
 
 .grid-button:active {
   transform: scale(0.95);
+}
+
+.active {
+  background-color: var(--current-active); /* Use variable for active state */
+  color: var(--text-dark); /* Ensure contrast for active text */
+  border: 0.2rem solid var(--text-dark); /* Bold border for emphasis */
+  font-weight: bold; /* Make the text stand out */
+  box-shadow: 0 0 1rem var(--current-active); /* Subtle glow effect */
+  transform: translateY(-0.2rem); /* Slight lift to indicate activeness */
+  transition: transform 0.2s ease, box-shadow 0.3s ease, opacity 0.2s;
+}
+
+.active:hover,
+.inactive:hover {
+  background-color: var(--current-active); /* Use variable for active state */
+  color: var(--text-dark); /* Ensure contrast for active text */
+  border: 0.2rem solid var(--text-dark); /* Bold border for emphasis */
+  font-weight: bold; /* Make the text stand out */
+  box-shadow: 0 0 1rem var(--current-active); /* Subtle glow effect */
+  opacity: 0.8;
+}
+
+.inactive {
+  background-color: var(--current-inactive);
+  color: var(--text-muted);
+  border: 0.1rem solid var(--btn-outline);
+  box-shadow: none;
+  transform: translateY(0);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.page-title {
+  font-size: 3rem; /* Large font size for emphasis */
+  color: var(--equals-btn-bg); /* Bright purple for attention */
+  text-align: center; /* Center-align the text */
+  font-weight: bold; /* Make the title bold */
+  letter-spacing: 0.1rem; /* Slight letter spacing for style */
+  text-shadow: 2px 2px 8px var(--accent-light), 0 0 25px var(--current-active); /* Subtle shadow for depth */
+  animation: title-glow 2s ease-in-out infinite alternate; /* Glow effect animation */
+}
+
+/* Glow animation */
+@keyframes title-glow {
+  0% {
+    text-shadow: 2px 2px 8px var(--accent-light), 0 0 25px var(--current-active);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--current-active), 0 0 50px var(--current-active);
+  }
+  100% {
+    text-shadow: 2px 2px 8px var(--accent-light), 0 0 25px var(--current-active);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+.currency-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+.currency-title {
+  font-size: 3rem;
+  color: var(--equals-btn-bg);
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 2px 2px 8px var(--accent-light), 0 0 25px var(--current-active);
+}
+
+.currency-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 40rem;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.currency-dropdown {
+  max-height: 5rem;
+  font-size: 1.8rem;
+  padding: 1rem;
+  border: 1px solid var(--btn-outline);
+  border-radius: 0.5rem;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.currency-dropdown:hover {
+  background-color: var(--btn-hover);
+}
+
+.currency-display {
+  display: grid;
+  grid-template-columns: 1fr 4rem;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background-color: var(--accent-light);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  gap: 0.5rem;
+  color: var(--text-dark);
+  text-align: right;
+}
+
+.currency-input {
+  flex: 1;
+  font-size: 1.5rem;
+  padding: 1rem;
+  background-color: var(--bg-light);
+  border: 1px solid var(--btn-outline);
+  color: var(--text-dark);
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.currency-input:focus {
+  outline: none;
+  border-color: var(--equals-btn-bg); /* Green border on focus */
+  color: var(--equals-btn-bg); /* Green text color on focus */
+}
+
+.currency-input:focus {
+  outline: none;
+  border-color: var(--btn-hover);
+}
+
+.currency-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 40rem;
+  margin-bottom: 2rem;
+}
+
+.currency-dropdown {
+  font-size: 1.8rem;
+  padding: 1rem;
+  border: 1px solid var(--btn-outline);
+  border-radius: 0.5rem;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.currency-dropdown:hover {
+  background-color: var(--btn-hover);
+}
+
+.currency-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  gap: 0.5rem;
+  color: var(--text-dark);
+}
+
+.currency-name {
+  font-size: 2rem;
+}
+
+.currency-input {
+  font-size: 1.5rem;
+  padding: 1rem;
+  background-color: var(--bg-light);
+  border: 1px solid var(--btn-outline);
+  color: var(--text-dark);
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.currency-input:focus {
+  outline: none;
+  border-color: var(--btn-hover);
+}
+
+/* Custom Styles for the 'To' currency display (converted value) */
+.converted .currency-dropdown {
+  background-color: var(--bg-light);
+  border-color: var(--btn-hover);
+}
+
+.converted .currency-display {
+  background-color: var(--accent-light);
+  border: 1px solid var(--btn-outline);
+}
+
+.converted-display {
+  background-color: #e0e0e0; /* Light background for the converted value */
+  color: green; /* Text color green for converted value */
+}
+
+.swap-button {
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0 1rem; /* Add some margin around the button */
+}
+
+.swap-button:hover {
+  background-color: var(--btn-hover); /* Change color on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.swap-button:active {
+  background-color: var(--btn-active); /* Active state color */
+  transform: scale(1); /* Reset the button size on click */
 }
